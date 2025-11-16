@@ -17,6 +17,7 @@ class CurriculumPlanForm
                     ->required(),
                 Select::make('status')
                     ->options(['active' => 'Active', 'inactive' => 'Inactive'])
+                    ->default('active')
                     ->required(),
                 Textarea::make('note')
                     ->columnSpanFull(),
