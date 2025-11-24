@@ -15,8 +15,6 @@ return new class extends Migration {
             $table->unsignedInteger('duration_minutes_per_week');
             $table->unsignedTinyInteger('group_counts');
             $table->text('note')->nullable();
-
-
             $table->foreignId('semester_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->morphs('course');
             $table->timestamps();

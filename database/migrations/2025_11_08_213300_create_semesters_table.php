@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('name');
             $table->enum('status', ['active', 'inactive']);
             $table->integer('sort_order')->default(0);
-            $table->foreignId('curriculum_plan')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->json('preferred_days');
+            $table->foreignId('major_specialization_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+//            $table->json('preferred_days');
             $table->timestamps();
         });
     }
