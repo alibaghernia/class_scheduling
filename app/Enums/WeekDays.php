@@ -39,7 +39,7 @@ enum WeekDays: string
         return self::byIndex($previousIndex);
     }
 
-    public function index()
+    public function index(): false|int|string
     {
         return array_search($this, self::cases());
     }
