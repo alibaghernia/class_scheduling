@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code')->unique()->nullable();
+            $table->string('code')->nullable(); // todo uniq code for major_specialization
             $table->unsignedTinyInteger('theory_units');
             $table->unsignedTinyInteger('practical_units');
             $table->decimal('equivalent_units');
