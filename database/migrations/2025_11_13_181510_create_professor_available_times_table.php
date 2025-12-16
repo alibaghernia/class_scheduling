@@ -10,9 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('professor_available_hours', function (Blueprint $table) {
+        Schema::create('professor_available_times', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('professor_available_day_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('professor_id')->constrained();
+            $table->enum('weekday',
+                ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',]);
             $table->time('start_time');
             $table->time('end_time');
             $table->enum('priority', ['low', 'medium', 'high']);
@@ -25,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('professor_available_hours');
+        Schema::dropIfExists('professor_available_times');
     }
 };
