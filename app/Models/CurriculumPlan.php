@@ -9,4 +9,9 @@ class CurriculumPlan extends Model
 {
     /** @use HasFactory<\Database\Factories\CurriculumPlanFactory> */
     use HasFactory;
+
+    public function majors()
+    {
+        return $this->hasMany(Major::class);
+    }
 }

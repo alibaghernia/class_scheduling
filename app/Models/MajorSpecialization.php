@@ -9,4 +9,13 @@ class MajorSpecialization extends Model
 {
     /** @use HasFactory<\Database\Factories\MajorSpecializationFactory> */
     use HasFactory;
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+    public function semesters()
+    {
+        return $this->hasMany(Semester::class);
+    }
 }
