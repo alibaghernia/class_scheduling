@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TermCourse extends Model
+class SemesterCourse extends Model
 {
-    /** @use HasFactory<\Database\Factories\TermCourseFactory> */
+    /** @use HasFactory<\Database\Factories\SemesterCourseFactory> */
     use HasFactory;
 }

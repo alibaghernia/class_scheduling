@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('term_courses', function (Blueprint $table) {
+        Schema::create('semester_courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('duration_minutes_per_week');
             $table->unsignedTinyInteger('group_counts');
