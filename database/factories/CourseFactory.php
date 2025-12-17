@@ -36,6 +36,7 @@ class CourseFactory extends Factory
             'practical_units' => $practicalUnits,
             'theory_units' => $theoryUnits,
             'equivalent_units' => $equivalentUnits,
+            'group_counts' => 1,
         ];
     }
 }

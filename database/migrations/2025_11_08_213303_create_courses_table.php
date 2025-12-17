@@ -17,7 +17,9 @@ return new class extends Migration {
             $table->unsignedTinyInteger('theory_units');
             $table->unsignedTinyInteger('practical_units');
             $table->decimal('equivalent_units');
-            $table->unsignedInteger('duration');
+            $table->unsignedInteger('duration')->comment('minutes per week');
+            $table->text('note')->nullable();
+            $table->unsignedTinyInteger('group_counts');
             $table->foreignId('semester_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
