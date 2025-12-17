@@ -12,6 +12,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Livewire\Mechanisms\HandleComponents\Synthesizers\StdClassSynth;
 use stdClass;
+use App\Enums\WeekDays;
+use Illuminate\Database\Eloquent\Collection;
 
 class DatabaseSeeder extends Seeder
 {
@@ -100,7 +102,65 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        $curriculumPlans = \App\Models\CurriculumPlan::all();
+        foreach ($curriculumPlans as $curriculumPlan) {
+            $majors = $curriculumPlan->majors;
+            foreach ($majors as $major) {
+                $majorSpecializations = $major->majorSpecializations;
+                foreach ($majorSpecializations as $majorSpecialization) {
+                    /** @var Collection $semesters */
+                    $semesters = $majorSpecialization->semesters;
+                    foreach ($semesters as $semesterIndex => $semester) {
+                        if ($semesterIndex === 0) {
+                            continue;
+                        }
+                        /** @var Collection $courses */
+                        $courses = $semester->courses;
+                        $cloneCourses = clone $courses;
 
+                        $matches = [
+                            1 => ['c' => 1, 'p' => 3],
+                            2 => ['c' => 1, 'p' => 5],
+                            4 => ['c' => 0, 'p' => 7],
+                            3 => ['c' => 0, 'p' => 7],
+                            5 => ['c' => 2, 'p' => 5],
+                            6 => ['c' => 0, 'p' => 7],
+                            7 => ['c' => 2, 'p' => 3],
+                        ];
+                        $semesterMatch = $matches[$semesterIndex];
+                        $co = min($semesterMatch['c'], count($courses));
+                        $pre = min($semesterMatch['p'], count($courses));
+                        $toPreSemester = random_int(1, 8) === 1 ? 3 : 2;
+                        $toPreSemester = min($toPreSemester, $semesterIndex);
+                        $preCourses = [];
+                        for ($i = $semesterIndex - 1; $i >= $semesterIndex - $toPreSemester; $i--) {
+                            $preCourses = [
+                                ...$preCourses,
+                                ...$semesters[$i]->courses,
+                            ];
+                        }
+
+                        $arrayCourses = [...$cloneCourses];
+
+                        for ($j = 0; $j < $co; $j++) {
+                            shuffle($arrayCourses);
+                            shuffle($preCourses);
+                            /** @var Course $course */
+                            $course = $arrayCourses[$j];
+                            $course->corequisites()->syncWithoutDetaching($preCourses[$j]->id);
+                        }
+
+                        for ($k = 0; $k < $pre; $k++) {
+                            shuffle($arrayCourses);
+                            shuffle($preCourses);
+                            /** @var Course $course */
+                            $course = $arrayCourses[$k];
+                            $course->prerequisites()->syncWithoutDetaching($preCourses[$k]->id);
+                        }
+                    }
+                }
+            }
+        }
 
 
     }
