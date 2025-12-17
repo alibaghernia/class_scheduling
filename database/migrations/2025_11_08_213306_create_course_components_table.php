@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('course_components', function (Blueprint $table) {
-            $table->id();
+//            $table->id();
             $table->foreignId('composite_course_id')->comment('merged course')
                 ->constrained('courses')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('component_course_id')

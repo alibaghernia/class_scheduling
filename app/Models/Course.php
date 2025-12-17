@@ -57,4 +57,14 @@ class Course extends Model
             'course_id'                // درسی که به آن وابسته است
         );
     }
+
+    public function components()
+    {
+        return $this->belongsToMany(
+            Course::class,
+            'course_components',
+            'composite_course_id',
+            'component_course_id'
+        )->using(CourseComponent::class);
+    }
 }
