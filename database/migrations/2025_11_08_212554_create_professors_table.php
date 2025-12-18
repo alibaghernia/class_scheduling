@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('family');
             $table->string('code')->unique()->nullable();
             $table->boolean('is_faculty_member');
-            $table->decimal('required_min_units');
+            $table->decimal('min_units');
             $table->decimal('max_units')->nullable();
             $table->unsignedTinyInteger('max_classes')->nullable();
             $table->enum('status', ['active', 'inactive']);
