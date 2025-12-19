@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\CurriculumPlan;
 use App\Models\Major;
 use App\Models\MajorSpecialization;
+use App\Models\Professor;
 use App\Models\Semester;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -162,6 +163,9 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        Professor::factory()
+            ->count(intval(Course::count() / 4) + 1)
+            ->create();
 
     }
 }
