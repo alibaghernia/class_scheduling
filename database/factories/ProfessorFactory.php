@@ -19,8 +19,13 @@ class ProfessorFactory extends Factory
 
         $minUnits = $this->faker->biasedNumberBetween(0, 10);
         $maxUnits = $this->faker->biasedNumberBetween(5, 15, 'exp');
-        $minUnits = min($minUnits, $maxUnits);
-        $maxUnits = max($minUnits, $maxUnits);
+        if ($minUnits > $maxUnits) {
+            $tmp = $minUnits;
+            $minUnits = $maxUnits;
+            $maxUnits = $tmp;
+        }
+        $minUnits = $this->faker->boolean(10) ? $minUnits : 0;
+
         return [
             'name' => $this->faker->firstName,
             'family' => $this->faker->lastName,
